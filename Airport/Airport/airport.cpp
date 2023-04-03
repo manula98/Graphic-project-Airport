@@ -33,6 +33,7 @@ GLfloat sceX = 0, sceY = 0, sceZ = 0;
 
 void init() {
     glClearColor(0.439f, 0.871f, 0.969f, 1.0f);
+    //glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glEnable(GL_DEPTH_TEST);
 
     glEnable(GL_NORMALIZE);
@@ -312,7 +313,7 @@ void display() {
     glLightfv(GL_LIGHT0, GL_DIFFUSE, paleYellow);
     GLfloat white[] = { 1.0,1.0,1.0,1.0 };
     glLightfv(GL_LIGHT0, GL_SPECULAR, white);
-    /*glEnable(GL_LIGHT0);*/
+    //glEnable(GL_LIGHT0);
 
     /* positioned the light source 2 */
     GLfloat position1[] = { -20.0,2.0,-20.0,1.0 };
@@ -339,6 +340,7 @@ void display() {
 
     glPushMatrix();
     displayScene();
+    //drawBuilding();
     glPopMatrix();
 
     glutSwapBuffers();
@@ -362,7 +364,7 @@ void Timer(int v) {
     //color change 
     if (planeGo == 75) {
         planeRotateY = 180;
-        planeG = 0;
+        planeG = 1;
         planeR = 1;
     }
 

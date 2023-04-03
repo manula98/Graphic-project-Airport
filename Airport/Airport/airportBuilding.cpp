@@ -524,6 +524,183 @@ void drawBuilding3() {
 	glPopMatrix();
 }
 
+void drawA() {
+	glPushMatrix();
+	glScalef(1, 0.9, 1);
+	//letter A
+	glPushMatrix();
+	glTranslatef(0, 0, -0.5);
+	glRotatef(-70, 1, 0, 0);
+	drawCylinder1(0.3, 3);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(0, 0, 0.5);
+	glRotatef(70, 1, 0, 0);
+	drawCylinder1(0.3, 3);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(0, 1.2, 0);
+	glRotatef(-90, 1, 0, 0);
+	glutSolidCone(0.37, 1, 100, 100);
+	glPopMatrix();
+
+	glPushMatrix();
+	drawCylinder1(0.3, 1);
+	glPopMatrix();
+
+	glPopMatrix();
+}
+
+void drawI() {
+
+	glPushMatrix();
+	//letter I
+	glPushMatrix();
+	glRotatef(90, 1, 0, 0);
+	drawCylinder1(0.3, 2.6);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(0, 1.3, 0);
+	drawCylinder1(0.3, 2);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(0, -1.3, 0);
+	drawCylinder1(0.3, 2);
+	glPopMatrix();
+
+	glPopMatrix();
+}
+
+void drawR() {
+
+	glPushMatrix();
+	//letter R
+	glPushMatrix();
+	glRotatef(90, 1, 0, 0);
+	drawCylinder1(0.3, 3);
+	glPopMatrix();
+
+	glPushMatrix();
+	glEnable(GL_CLIP_PLANE0);
+	double planeEquation[] = { 1.0, 0.0, 0.0, 0.1 };
+	glClipPlane(GL_CLIP_PLANE0, planeEquation);
+	glTranslatef(0.5, 0.6, 0);
+	glScalef(1, 0.8, 1);
+	glutSolidTorus(0.3, 1, 100, 100);
+	glDisable(GL_CLIP_PLANE0);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(1, -0.7, 0);
+	glRotatef(30, 0, 0, 1);
+	glRotatef(90, 1, 0, 0);
+	drawCylinder1(0.3, 1.5);
+	glPopMatrix();
+
+	glPopMatrix();
+}
+
+void drawP() {
+
+	glPushMatrix();
+	//letter p
+	glPushMatrix();
+	glRotatef(90, 1, 0, 0);
+	drawCylinder1(0.3, 3);
+	glPopMatrix();
+
+	glPushMatrix();
+	glEnable(GL_CLIP_PLANE0);
+	double planeEquation[] = { 1.0, 0.0, 0.0, 0.1 };
+	glClipPlane(GL_CLIP_PLANE0, planeEquation);
+	glTranslatef(0.5, 0.6, 0);
+	glScalef(1, 0.8, 1);
+	glutSolidTorus(0.3, 1, 100, 100);
+	glDisable(GL_CLIP_PLANE0);
+	glPopMatrix();
+
+	glPopMatrix();
+}
+
+void drawO() {
+	glPushMatrix();
+	//letter o
+	glPushMatrix();
+	glScalef(0.8, 1, 1);
+	glutSolidTorus(0.3, 1.5, 100, 100);
+	glPopMatrix();
+	glPopMatrix();
+
+	glPopMatrix();
+}
+
+void drawT() {
+	glPushMatrix();
+	//letter T
+	glPushMatrix();
+	glRotatef(90, 1, 0, 0);
+	drawCylinder1(0.3, 2.6);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(0, 1.3, 0);
+	//glRotatef(90, 1, 0, 0);
+	drawCylinder1(0.3, 2.5);
+	glPopMatrix();
+
+	glPopMatrix();
+}
+
+void drawAirport() {
+
+	glPushMatrix();
+	//draw AIR PORT
+	
+	glPushMatrix();
+	drawA();
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(0, 0, 2.5);
+	drawI();
+	glPopMatrix();
+	
+	glPushMatrix();
+	glTranslatef(0, 0, 4.2);
+	glRotatef(-90, 0, 1, 0);
+	drawR();
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(0, 0, 8);
+	glRotatef(-90, 0, 1, 0);
+	drawP();
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(0, 0, 11.5);
+	glRotatef(-90, 0, 1, 0);
+	drawO();
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(0, 0, 14);
+	glRotatef(-90, 0, 1, 0);
+	drawR();
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(0, 0, 17.5);
+	drawT();
+	glPopMatrix();
+
+	glPopMatrix();
+}
+
 void drawBuilding() {
 	drawHarfGoalBuilding();
 
@@ -545,6 +722,12 @@ void drawBuilding() {
 	glPushMatrix();
 	glTranslatef(3, 2, 5);
 	drawBuilding3();
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(3, 4.5, 3);
+	glScalef(0.3, 0.3, 0.3);
+	drawAirport();
 	glPopMatrix();
 
 }

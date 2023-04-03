@@ -30,11 +30,18 @@ void drawFlow(float r, float g, float b, int x, int y) {
 	glPopMatrix(); 
 }
 
-void drawLine(int x, int y) {
+void drawLine(float r,float g,float b) {
 	glPushMatrix();
 	glColor3f(1, 1, 0);
-	glScalef(0.1, 0.02, 1.3);
+	glScalef(0.1, 0.02, 1.2);
 	drawCube3(1);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(0, 0, 1);
+	glColor3f(r, g, b);
+	glScalef(0.2, 0.2, 0.2);
+	glutSolidSphere(1, 100, 100);
 	glPopMatrix();
 }
 
@@ -52,21 +59,27 @@ void drawRoad(float r,float g,float b,int x,int y) {
 	}
 	glPopMatrix();
 
+	glPopMatrix();
+}
+
+void drawLineAndBulb(float r,float g,float b,int x,int y) {
+	glPushMatrix();
+
 	//draw Roads Lines
 	glPushMatrix();
-	for (float i = -y/2; i <= y/2; i+= 2) {
+	for (float i = -y / 2; i <= y / 2; i += 2) {
 		glPushMatrix();
-		glTranslatef(x/2, 0.1, i);
-		drawLine(x, y);
+		glTranslatef(x / 2, 0.1, i);
+		drawLine(r, g, b);
 		glPopMatrix();
 	}
 	glPopMatrix();
 
 	glPushMatrix();
-	for (float i = -y/2; i <= y/2; i += 2) {
+	for (float i = -y / 2; i <= y / 2; i += 2) {
 		glPushMatrix();
-		glTranslatef(-x/2, 0.1, i);
-		drawLine(x, y);
+		glTranslatef(-x / 2, 0.1, i);
+		drawLine(r, g, b);
 		glPopMatrix();
 	}
 	glPopMatrix();

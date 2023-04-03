@@ -38,7 +38,7 @@ void drawSphere(double r) {
 	glPopMatrix();
 }
 
-void drawBackPlane(int r,int g,int b) {
+void drawBackPlane(float r,float g,float b) {
 	glPushMatrix();
 	glColor3f(r, g, b);
 	glPushMatrix();
@@ -71,7 +71,7 @@ void drawCube(){
 	glPopMatrix();
 }
 
-void drawPlaneLeftWin(int r,int g,int b) {
+void drawPlaneLeftWin(float r,float g,float b) {
 	glPushMatrix();
 
 	glPushMatrix();
@@ -123,7 +123,7 @@ void drawPlaneLeftWin(int r,int g,int b) {
 
 	glPopMatrix();
 }
-void drawLeftWin(int r, int g, int b) {
+void drawLeftWin(float r, float g, float b) {
 	glPushMatrix();
 	glEnable(GL_CLIP_PLANE1);
 	double planeEquation2[] = { 0.0, -4.0, -0.9, 0.2 };
@@ -133,7 +133,7 @@ void drawLeftWin(int r, int g, int b) {
 	glPopMatrix();
 }
 
-void drawPlaneRightWin(int r, int g, int b) {
+void drawPlaneRightWin(float r, float g, float b) {
 	glPushMatrix();
 
 	glPushMatrix();
@@ -186,7 +186,7 @@ void drawPlaneRightWin(int r, int g, int b) {
 	glPopMatrix();
 }
 
-void drawRightWin(int r, int g, int b) {
+void drawRightWin(float r, float g, float b) {
 	glPushMatrix();
 	glEnable(GL_CLIP_PLANE1);
 	double planeEquation2[] = { 0.0, -4.0, 0.9, 0.2 };
@@ -196,7 +196,7 @@ void drawRightWin(int r, int g, int b) {
 	glPopMatrix();
 }
 
-void drawBackWin(int r, int g, int b) {
+void drawBackWin(float r, float g, float b) {
 	glPushMatrix();
 
 	glPushMatrix();
@@ -439,7 +439,7 @@ void drawEngineWin() {
 	glPopMatrix();
 }
 
-void drawEngine(int r,int g,int b) {
+void drawEngine(float r,float g,float b) {
 	glPushMatrix();
 	
 	glPushMatrix();
@@ -534,7 +534,7 @@ void drawEngineSet() {
 	glPopMatrix();
 }
 
-void drawPlane(int r,int g,int b) {
+void drawPlane(float r,float g,float b) {
 	glPushMatrix();
 
 	glPushMatrix();
@@ -603,7 +603,7 @@ void drawPlane(int r,int g,int b) {
 	
 }
 
-void placePlane(int r,int g,int b) {
+void placePlane(float r,float g,float b) {
 	
 	glPushMatrix();
 	//glTranslatef(x, y, z);

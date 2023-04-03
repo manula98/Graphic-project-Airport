@@ -10,24 +10,29 @@ GLfloat animXRot, animYRot, animZRot = 0;
 GLfloat camX = 0, camY = 0, camZ = 0;
 
 //mover plane
-GLfloat movePlaneX = 0, movePlaneY = 0, movePlaneZ = 60, helpPlane = 0;
+GLfloat movePlaneX = 0, movePlaneY = 0, movePlaneZ = 60, planeGo = 0;
 
 //plane rotation
 GLfloat planeRotateX, planeRotateY, planeRotateZ = 0;
 
-//Crain variables - operating Room
-//GLfloat crainY = 0;
-//GLfloat crainWidth = 9;
-//GLfloat crainArm = 0;
+//blub 
+int blubOn = 0;
 
-// boa6t variables
-//GLfloat boatY = 360;
+// Animated Plane Color
+float planeR = 0;
+float planeG = 1;
+float planeB = 0;
+
+//Animated Bulb color
+float blubR = 1;
+float blubG = 1;
+float blubB = 1;
 
 //scene variables
 GLfloat sceX = 0, sceY = 0, sceZ = 0;
 
 void init() {
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClearColor(0.439f, 0.871f, 0.969f, 1.0f);
     glEnable(GL_DEPTH_TEST);
 
     glEnable(GL_NORMALIZE);
@@ -90,14 +95,81 @@ void runPlane() {
     //runaway plane
     glPushMatrix();
     glScalef(0.45, 0.45, 0.45);
-    glTranslatef(0, 2.4+ movePlaneY, movePlaneZ);
+    glTranslatef(0 + movePlaneX, 2.4 + movePlaneY, movePlaneZ);
     glRotatef(planeRotateX, 1, 0, 0);
     glRotatef(planeRotateY, 0, 1, 0);
     glRotatef(planeRotateZ, 0, 0, 1);
 
 
     glRotatef(180, 0, 1, 0);
-    placePlane(0, 1, 0);
+    placePlane(planeR, planeG, planeB);
+    glPopMatrix();
+}
+
+void drawShortRunaway() {
+    glPushMatrix();
+    glPushMatrix();
+    glEnable(GL_CLIP_PLANE0);
+    double planeEquation[] = { -1.0, 0.0, 0.0, -5.0 };
+    glClipPlane(GL_CLIP_PLANE0, planeEquation);
+
+    //short 1st yard runaway
+    glPushMatrix();
+    glTranslatef(-6, -0.02, -6);
+    glRotatef(-45, 0, 1, 0);
+    drawLineAndBulb(blubR, blubG, blubB, 7, 15);
+    drawRunaway(1, 1, 1, 7, 15);
+    glPopMatrix();
+
+    //short 2nd yard runaway
+    glPushMatrix();
+    glTranslatef(-6, -0.02, 8);
+    glRotatef(-45, 0, 1, 0);
+    drawLineAndBulb(blubR, blubG, blubB, 7, 15);
+    drawRunaway(1, 1, 1, 7, 15);
+    glPopMatrix();
+
+    //short 3rd yard runaway
+    glPushMatrix();
+    glTranslatef(-4, -0.02, 20);
+    glRotatef(-45, 0, 1, 0);
+    drawLineAndBulb(blubR, blubG, blubB, 7, 15);
+    drawRunaway(1, 1, 1, 7, 15);
+    glPopMatrix();
+    glDisable(GL_CLIP_PLANE0);
+    glPopMatrix();
+
+    glPushMatrix();
+    glEnable(GL_CLIP_PLANE1);
+    double planeEquation1[] = { 1.0, 0.0, 0.0, -5.0 };
+    glClipPlane(GL_CLIP_PLANE1, planeEquation1);
+
+    //short 1st runaway no yard
+    glPushMatrix();
+    glTranslatef(6, -0.02, -6);
+    glRotatef(45, 0, 1, 0);
+    drawLineAndBulb(blubR, blubG, blubB, 7, 15);
+    drawRunaway(1, 1, 1, 7, 15);
+    glPopMatrix();
+
+    //short 2nd runaway no yard
+    glPushMatrix();
+    glTranslatef(6, -0.02, 8);
+    glRotatef(45, 0, 1, 0);
+    drawLineAndBulb(blubR, blubG, blubB, 7, 15);
+    drawRunaway(1, 1, 1, 7, 15);
+    glPopMatrix();
+
+    //short 3rd runaway no yard 
+    glPushMatrix();
+    glTranslatef(4, -0.02, 20);
+    glRotatef(45, 0, 1, 0);
+    drawLineAndBulb(blubR, blubG, blubB, 7, 15);
+    drawRunaway(1, 1, 1, 7, 15);
+    glPopMatrix();
+    glDisable(GL_CLIP_PLANE1);
+    glPopMatrix();
+
     glPopMatrix();
 }
 
@@ -114,7 +186,7 @@ void displayScene() {
     glScalef(0.45, 0.45, 0.45);
     glTranslatef(-27, 2.4, 0);
     glRotatef(-45, 0, 1, 0);
-    placePlane(0, 1, 0);
+    placePlane(0.941, 0.988, 0.173);
     glPopMatrix();
 
     //2nd plane yard plane
@@ -122,7 +194,7 @@ void displayScene() {
     glScalef(0.45, 0.45, 0.45);
     glTranslatef(-27, 2.4, 31.5);
     glRotatef(-45, 0, 1, 0);
-    placePlane(0, 1, 0);
+    placePlane(0.741, 0.737, 0.678);
     glPopMatrix();
 
     //3rd plane yard plane
@@ -130,7 +202,7 @@ void displayScene() {
     glScalef(0.45, 0.45, 0.45);
     glTranslatef(-22, 2.4, 58);
     glRotatef(-45, 0, 1, 0);
-    placePlane(0, 1, 0);
+    placePlane(0.875, 0.961, 0.624);
     glPopMatrix();
 
     //1nd plane
@@ -138,7 +210,7 @@ void displayScene() {
     glScalef(0.45, 0.45, 0.45);
     glTranslatef(27, 2.4, 0);
     glRotatef(45, 0, 1, 0);
-    placePlane(0, 1, 0);
+    placePlane(1, 1, 1);
     glPopMatrix();
 
     //2nd plane
@@ -146,7 +218,7 @@ void displayScene() {
     glScalef(0.45, 0.45, 0.45);
     glTranslatef(27, 2.4, 31.5);
     glRotatef(45, 0, 1, 0);
-    placePlane(0, 1, 0);
+    placePlane(0.941, 0.91, 0.855);
     glPopMatrix();
 
     //movin plane
@@ -207,47 +279,13 @@ void displayScene() {
     drawRunaway(1, 1, 1, 10, 60);
     glPopMatrix();
     
-    //short 1st yard runaway
+    //short Runaway
     glPushMatrix();
-    glTranslatef(-6, -0.02, -6);
-    glRotatef(-45, 0, 1, 0);
-    drawRunaway(1, 1, 1, 7, 15);
+    drawShortRunaway();
     glPopMatrix();
 
-    //short 1st runaway no yard
-    glPushMatrix();
-    glTranslatef(6, -0.02, -6);
-    glRotatef(45, 0, 1, 0);
-    drawRunaway(1, 1, 1, 7, 15);
-    glPopMatrix();
-
-    //short 2nd runaway no yard
-    glPushMatrix();
-    glTranslatef(6, -0.02, 8);
-    glRotatef(45, 0, 1, 0);
-    drawRunaway(1, 1, 1, 7, 15);
-    glPopMatrix();
-
-    //short 2nd yard runaway
-    glPushMatrix();
-    glTranslatef(-6, -0.02, 8);
-    glRotatef(-45, 0, 1, 0);
-    drawRunaway(1, 1, 1, 7, 15);
-    glPopMatrix();
-
-    //short 3rd yard runaway
-    glPushMatrix();
-    glTranslatef(-4, -0.02, 20);
-    glRotatef(-45, 0, 1, 0);
-    drawRunaway(1, 1, 1, 7, 15);
-    glPopMatrix();
-
-    //short 3rd runaway no yard 
-    glPushMatrix();
-    glTranslatef(4, -0.02, 20);
-    glRotatef(45, 0, 1, 0);
-    drawRunaway(1, 1, 1, 7, 15);
-    glPopMatrix();
+    //Runaway Lines and Bulb
+    drawLineAndBulb(blubR, blubG, blubB, 10, 60);
 }
 
 void display() {
@@ -274,7 +312,7 @@ void display() {
     glLightfv(GL_LIGHT0, GL_DIFFUSE, paleYellow);
     GLfloat white[] = { 1.0,1.0,1.0,1.0 };
     glLightfv(GL_LIGHT0, GL_SPECULAR, white);
-    glEnable(GL_LIGHT0);
+    /*glEnable(GL_LIGHT0);*/
 
     /* positioned the light source 2 */
     GLfloat position1[] = { -20.0,2.0,-20.0,1.0 };
@@ -284,7 +322,7 @@ void display() {
     glLightfv(GL_LIGHT1, GL_DIFFUSE, paleYellow);
     GLfloat green[] = { 0.0,1.0,0.0,1.0 };
     glLightfv(GL_LIGHT1, GL_SPECULAR, green);
-    glEnable(GL_LIGHT1);
+    //glEnable(GL_LIGHT1);
 
 
 
@@ -292,16 +330,15 @@ void display() {
     glTranslatef(sceX, sceY, sceZ);
     glRotatef(animYRot, 0, 1, 0);
     glPushMatrix();
-    drawAxes();
+    //drawAxes();
 
     glPushMatrix();
     glColor3f(1.0, 1, 1);
-    drawGrid();
+    //drawGrid();
     glPopMatrix();
 
     glPushMatrix();
     displayScene();
-    //drawBuilding();
     glPopMatrix();
 
     glutSwapBuffers();
@@ -309,40 +346,68 @@ void display() {
 }
 
  //animation timer function
-void Timer(int v) {
-  
-    helpPlane++;
-    if (helpPlane < 40) {
-        movePlaneZ -= 2;
-    }
-    if (helpPlane > 40) {
-        movePlaneZ -= 2;
-       
-        if (helpPlane > 40 && helpPlane < 50) {
+void Timer(int v) {  
+    planeGo++;
+    blubOn++;
+
+    if (planeGo < 75) {
+        if (planeGo > 40 && planeGo < 50) {
             planeRotateX += 2;
         }
+        if (planeGo > 44) {
+            movePlaneY += 1;
+        }
+        movePlaneZ -= 2;
     }
-    if (helpPlane > 44) {
-        movePlaneY += 1;
+    //color change 
+    if (planeGo == 75) {
+        planeRotateY = 180;
+        planeG = 0;
+        planeR = 1;
     }
 
- /*   if (helpPlane > 60) {
-        planeRotateY = -180;
+    if (planeGo > 75 && planeGo < 130) {
+        if (planeGo < 106) {
+            movePlaneY -= 1;
+        }
+        if (planeGo > 102 && planeGo < 112) {
+            planeRotateX -= 2;
+        }
         movePlaneZ += 2;
-        
-        if (helpPlane > 70 && helpPlane < 80) {
-            planeRotateX -= 1;
-        }
-        if (helpPlane > 85) {
-            movePlaneY = 0;
-        }
     }
-    if (helpPlane > 70) {
-        movePlaneY -= 1;
+
+    if (planeGo > 130 && planeGo < 170) {
+        movePlaneZ += 0.4;
+        if (planeGo > 150) {
+            movePlaneX += 0.3;
+        }        
+        planeRotateY+=1.2;
     }
-    if (helpPlane > 90) {
-        planeRotateY += 1;
-    }*/
+    if (planeGo > 170 && planeGo < 180) {
+        movePlaneX ++;
+        movePlaneZ += 1.5;
+    }
+
+    if (planeGo == 200) {
+        planeGo = 0;
+        movePlaneX = 0;
+        movePlaneY = 0; 
+        movePlaneZ = 60; 
+        planeRotateX = 0; 
+        planeRotateY = 0; 
+        planeRotateZ = 0;
+        planeG = 1;
+        planeR = 0;
+    }
+    if (blubOn % 4 == 0) {
+        blubG = 0;
+        blubB = 0;
+    
+    }else {
+        blubG = 1;
+        blubB = 1;
+    }
+
 
     glutPostRedisplay();
     glutTimerFunc(60, Timer, 0);
@@ -391,58 +456,6 @@ void keyboard(unsigned char key, int x, int y) {
         camZ = 0;
         animYRot = 0;
     }
-
-    // operating room
-    /*if (key == 'C') {
-        if (crainY == 360) {
-            crainY = 0;
-        }
-        else {
-            crainY += 1;
-        }
-    }
-    if (key == 'c') {
-        if (crainY == 0) {
-            crainY = 360;
-        }
-        else {
-            crainY -= 1;
-        }
-    }*/
-
-    // Crain arm
-    /*if (key == 'a') {
-        if (crainArm >= 85) {
-            crainArm = 85;
-        }
-        else {
-            crainArm += 1;
-        }
-    }
-    if (key == 'A') {
-        if (crainArm <= 0) {
-            crainArm = 0;
-        }
-        else {
-            crainArm -= 1;
-        }
-    }
-    if (key == 'w') {
-        if (crainWidth >= 9) {
-            crainWidth = 9;
-        }
-        else {
-            crainWidth += 0.02;
-        }
-    }
-    if (key == 'W') {
-        if (crainWidth <= 5.5) {
-            crainWidth = 5.5;
-        }
-        else {
-            crainWidth -= 0.02;
-        }
-    }*/
 
     // Move Scene along X axis
     if (key == 'X') {
